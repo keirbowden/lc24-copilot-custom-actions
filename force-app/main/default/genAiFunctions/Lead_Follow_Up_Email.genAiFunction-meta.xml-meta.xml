@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Generates an email follow up to a lead after an initial meeting.</description>
+    <invocationTarget>Lead_Follow_Up_Email</invocationTarget>
+    <invocationTargetType>generatePromptResponse</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <masterLabel>Lead Follow Up Email</masterLabel>
+</GenAiFunction>

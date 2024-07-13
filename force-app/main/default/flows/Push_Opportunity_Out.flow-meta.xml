@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <assignments>
+        <description>Captures the final close date to the commentary variable.</description>
+        <name>Capture_final_close_date</name>
+        <label>Capture final close date</label>
+        <locationX>176</locationX>
+        <locationY>566</locationY>
+        <assignmentItems>
+            <assignToReference>Commentary</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>&quot;After adding &quot; </stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Commentary</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>NumberofDays</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Commentary</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>&quot; Close Date is now &quot;</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Commentary</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Candidate_Opportunity.CloseDate</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <description>Captures the initial close date to the commentary</description>
+        <name>Capture_initial_close_date</name>
+        <label>Capture initial close date</label>
+        <locationX>176</locationX>
+        <locationY>242</locationY>
+        <assignmentItems>
+            <assignToReference>Commentary</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>&quot;Initial close date is &quot;</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Commentary</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Candidate_Opportunity.CloseDate</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Move_Closed_Date</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Moves the close date of the input opportunity out by the input number of days.</description>
+        <name>Move_Closed_Date</name>
+        <label>Move Closed Date</label>
+        <locationX>176</locationX>
+        <locationY>350</locationY>
+        <assignmentItems>
+            <assignToReference>Candidate_Opportunity.CloseDate</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>NumberofDays</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Opportunity</targetReference>
+        </connector>
+    </assignments>
+    <description>Pushes an opportunity close date out by the specified number of days</description>
+    <environments>Default</environments>
+    <interviewLabel>Move Opportunity Out {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Push Opportunity Out</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Extracts all the details of the candidate opportunity from the database.</description>
+        <name>Get_Opportunity_from_DB</name>
+        <label>Get Opportunity from DB</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Capture_initial_close_date</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Candidate_Opportunity.Id</elementReference>
+            </value>
+        </filters>
+        <object>Opportunity</object>
+        <outputReference>Candidate_Opportunity</outputReference>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Amount</queriedFields>
+        <queriedFields>CloseDate</queriedFields>
+        <queriedFields>Name</queriedFields>
+        <queriedFields>StageName</queriedFields>
+    </recordLookups>
+    <recordUpdates>
+        <description>Updates the opportunity whose close date has been moved.</description>
+        <name>Update_Opportunity</name>
+        <label>Update Opportunity</label>
+        <locationX>176</locationX>
+        <locationY>458</locationY>
+        <connector>
+            <targetReference>Capture_final_close_date</targetReference>
+        </connector>
+        <inputReference>Candidate_Opportunity</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Opportunity_from_DB</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>The opportunity whose close date should be moved out.</description>
+        <name>Candidate_Opportunity</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Opportunity</objectType>
+    </variables>
+    <variables>
+        <description>Details of the actions taken by the flow</description>
+        <name>Commentary</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue></stringValue>
+        </value>
+    </variables>
+    <variables>
+        <description>The number of days to move the Close Date out by.</description>
+        <name>NumberofDays</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>30.0</numberValue>
+        </value>
+    </variables>
+</Flow>

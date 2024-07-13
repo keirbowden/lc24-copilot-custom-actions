@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Returns the spend overview of a contact for the specified number of days and the current opportunities and cases.</description>
+    <invocationTarget>CopilotContactOverview</invocationTarget>
+    <invocationTargetType>apex</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <masterLabel>Contact Overview</masterLabel>
+</GenAiFunction>

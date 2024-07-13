@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Harvests details for a lead record from the body of an email and outputs them in JSON format</description>
+    <invocationTarget>Lead_From_Email</invocationTarget>
+    <invocationTargetType>generatePromptResponse</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <masterLabel>Lead From Email</masterLabel>
+</GenAiFunction>

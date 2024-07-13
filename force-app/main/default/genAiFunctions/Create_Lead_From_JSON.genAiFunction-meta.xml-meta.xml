@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Creates a lead record from an input JSON string containing the field values.</description>
+    <invocationTarget>CopilotCreateLeadFromJSON</invocationTarget>
+    <invocationTargetType>apex</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <masterLabel>Create Lead From JSON</masterLabel>
+</GenAiFunction>
