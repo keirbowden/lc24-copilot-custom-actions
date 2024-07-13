@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersion>2</activeVersion>
+    <description>Harvests details for a lead record from the body of an email</description>
+    <developerName>Lead_From_Email</developerName>
+    <masterLabel>Lead From Email</masterLabel>
+    <templateVersions>
+        <content>You are a sales rep who has received the following email from a prospect:
+
+-----
+{!$Input:Email_Body}
+-----
+
+Generate a recommendation for a lead record in JSON format, including the following details:
+- The first name of the prospect with the element label &apos;firstName&apos;
+- The last name of the prospect with the element label &apos;lastName&apos;
+- A summary of the prospect&apos;s interest with the element label &apos;description&apos;
+- The company that the prospect works for with the element label &apos;company&apos; - if you cannot determine the company from the email body, use the prospects first name and last name
+- The role of the prospect in the company they work for with the element label &apos;role&apos;
+
+Do not include any supporting text, output JSON only.
+</content>
+        <inputs>
+            <apiName>Email_Body</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Email Body</masterLabel>
+            <referenceName>Input:Email_Body</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT35Turbo</primaryModel>
+        <status>Published</status>
+        <versionNumber>1</versionNumber>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a sales rep who has received the following email from a prospect:
+
+-----
+{!$Input:Email_Body}
+-----
+
+Generate a recommendation for a lead record in JSON format, including the following details:
+- The first name of the prospect with the element label &apos;firstName&apos;
+- The last name of the prospect with the element label &apos;lastName&apos;
+- The phone number of the prospect with the element label &apos;phone&apos;
+- The email address of the prospect with the element label &apos;email&apos;
+- A summary of the prospect&apos;s interest with the element label &apos;description&apos;
+- The company that the prospect works for with the element label &apos;company&apos; - if you cannot determine the company from the email body, use the prospects first name and last name
+- The role of the prospect in the company they work for with the element label &apos;role&apos;
+
+Do not include any supporting text, output JSON only.
+</content>
+        <inputs>
+            <apiName>Email_Body</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Email Body</masterLabel>
+            <referenceName>Input:Email_Body</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT35Turbo</primaryModel>
+        <status>Published</status>
+        <versionNumber>2</versionNumber>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersion>1</activeVersion>
+    <description>Generates an email follow up to a lead after an initial meeting.</description>
+    <developerName>Lead_Follow_Up_Email</developerName>
+    <masterLabel>Lead Follow Up Email</masterLabel>
+    <templateVersions>
+        <content>You are {!$User.Name} - a Sales Manager at {!$Organization.Name}. You are writing an email to follow up with a lead named {!$Input:Candidate_Lead.Name}
+You do not have many details of exactly what the lead is looking for, just the following notes from the initial engagement:
+
+-----
+
+{!$Input:Candidate_Lead.Description}
+
+-----
+
+Express how you enjoyed meeting them and that you are following up because there was only time for a short conversation, but you would welcome the opportunity for a longer meeting. If the notes from the meeting indicate that there are specific ways you could help, call these out.
+
+Close the email saying you will give them a couple of days, then be back in touch to schedule a meeting to understand more about their needs.
+
+The tone of the email should be relatively formal but not obsequious or subservient.
+</content>
+        <inputs>
+            <apiName>Candidate_Lead</apiName>
+            <definition>SOBJECT://Lead</definition>
+            <masterLabel>Candidate Lead</masterLabel>
+            <referenceName>Input:Candidate_Lead</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4</primaryModel>
+        <status>Published</status>
+        <versionNumber>1</versionNumber>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>
