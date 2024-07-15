@@ -1,5 +1,6 @@
 public with sharing class CopilotContactOverview {
-    @InvocableMethod(label='Contact Overview' description='Returns a contact summary and a list of open cases and opportunities')
+    @InvocableMethod(label='Contact Overview' 
+      description='Returns a contact summary and a list of open cases and opportunities')
     public static List<Response> createContactOverview(List<Request> input)
     {
         Integer days=input[0].numberOfDays;
@@ -120,10 +121,12 @@ public with sharing class CopilotContactOverview {
 
     public class Request 
     {
-        @InvocableVariable(label='Contact' description='The contact to create the summary for')
+        @InvocableVariable(label='Contact' 
+          description='The contact to create the summary for')
         public Contact contact;
 
-        @InvocableVariable(label='Number of Days' description='The numnber of days to look back and calculate the account spend')
+        @InvocableVariable(label='Number of Days' 
+        description='The numnber of days to look back and calculate the contact spend')
         public Integer numberOfDays;
     }
 
